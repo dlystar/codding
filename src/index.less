@@ -1,0 +1,141 @@
+@import '~iview/src/styles/index.less';
+@menu-dark-title: #001529;
+@menu-dark-active-bg: #000c17;
+@layout-sider-background: #001529;
+@baseTheme: #29bcd2;
+input {
+    font-size: 14px !important;
+}
+
+input::placeholder {
+    color: #c0c4cc !important;
+    border-color: #dcdfe6 !important;
+}
+
+input[disabled] {
+    background-color: #f5f7fa !important;
+    color: #c0c4cc !important;
+}
+
+.searchArea {
+    .ivu-col {
+        margin-bottom: 10px;
+    }
+    .ivu-col-span-2 {
+        text-align: right;
+    }
+    .ivu-btn,
+    .ivu-btn-primary {
+        background-color: @baseTheme;
+        border-color: @baseTheme;
+    }
+}
+
+.ivu-modal-footer {
+    .ivu-btn-primary {
+        background-color: @baseTheme;
+        border-color: @baseTheme;
+    }
+}
+
+.ivu-card-head {
+    span {
+        color: @baseTheme;
+    }
+}
+
+.ivu-form-item-content {
+    .ivu-btn-primary {
+        background-color: @baseTheme;
+        border-color: @baseTheme;
+    }
+}
+
+.buttonArea {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    button {
+        margin-right: 10px;
+    }
+}
+
+.ivu-table-cell {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.ivu-page {
+    margin-top: 10px;
+}
+
+.ivu-table {
+    .ivu-btn-primary {
+        background-color: @baseTheme;
+        border-color: @baseTheme;
+    }
+}
+
+.ivu-tag-primary,
+.ivu-tag-primary.ivu-tag-dot .ivu-tag-dot-inner {
+    background: @baseTheme;
+}
+
+.ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu .ivu-menu-item-active,
+.ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu .ivu-menu-item-active:hover {
+    background: @baseTheme !important;
+}
+
+.ivu-page-item.ivu-page-item-active {
+    background: @baseTheme !important;
+}
+
+.ivu-page-item-active {
+    border-color: @baseTheme;
+}
+
+.dly_select {
+    cursor: pointer;
+    input {
+        cursor: pointer;
+    }
+}
+
+.dialogSelect {
+    .page {
+        overflow: hidden; // margin-top: 10px;
+    }
+}
+
+.line_button,
+.line_button-flat {
+    padding: 5px 10px;
+    border-radius: 3px;
+    background-color: #1B9AF7;
+    border-color: #1B9AF7;
+    color: #FFF;
+}
+
+.line_button:visited,
+.line_button-flat:visited {
+    color: #FFF;
+}
+
+.line_button:hover,
+.line_button:focus,
+.line_button-flat:hover,
+.line_button-flat:focus {
+    background-color: #4cb0f9;
+    border-color: #4cb0f9;
+    color: #FFF;
+}
+
+.line_button:active,
+.line_button.active,
+.line_button.is-active,
+.line_button-flat:active,
+.line_button-flat.active,
+.line_button-flat.is-active {
+    background-color: #2798eb;
+    border-color: #2798eb;
+    color: #0880d7;
+}
