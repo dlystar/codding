@@ -16,6 +16,7 @@ const router = new Router({
 const LOGIN_PAGE_NAME = 'login'
 
 const turnTo = (to, access, next) => {
+  console.log('页面:',to,access);
   if (canTurnTo(to.name, access, routes)) next() // 有权限，可访问
   else next({ replace: true, name: 'error_401' }) // 无权限，重定向到401页面
 }

@@ -464,6 +464,37 @@ export default [
     ]
   },
   {
+    path: '/baseFunction',
+    name: 'baseFunction',
+    meta: {
+      hideInMenu: false,
+    },
+    component: Main,
+    children: [
+      {
+        path: 'base_function_page',
+        name: 'base_function_page',
+        meta: {
+          icon: 'md-flower',
+          title: '基础功能',
+          notCache: true,
+        },
+        component: () => import('@/view/baseFunction/index.vue')
+      },
+      {
+        path: 'one_function_page/:id',
+        name: 'one_function_page',
+        meta: {
+          icon: 'md-flower',
+          title: route => `${route.params.id}`,
+          notCache: true,
+          hideInMenu: true
+        },
+        component: () => import('@/view/baseFunction/function.vue')
+      }
+    ]
+  },
+  {
     path: '/401',
     name: 'error_401',
     meta: {

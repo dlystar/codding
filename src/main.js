@@ -10,7 +10,6 @@ import config from '@/config'
 import importDirective from '@/directive'
 import { directive as clickOutside } from 'v-click-outside-x'
 import installPlugin from '@/plugin'
-import math from 'mathjs'
 import './index.less'
 import '@/assets/icons/iconfont.css'
 import TreeTable from 'tree-table-vue'
@@ -42,10 +41,7 @@ Vue.use(CKEditor);
 
 // 兼容ie配置
 import '@babel/polyfill'
-
-console.log(math)
 Vue.prototype.axios = axios;
-Vue.prototype.math = math;
 // 实际打包时应该不引入mock
 /* eslint-disable */
  // if (process.env.NODE_ENV !== 'production') require('@/mock')
