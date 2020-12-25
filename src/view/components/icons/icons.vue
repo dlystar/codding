@@ -1,43 +1,64 @@
 <template>
 	<div class="icons">
-		<div class="icon-item" v-for="item in iconList" :key="item.icon" v-clipboard="item.clipOptions">
-			<div class="icon-content">
-				<icons :size="30" :type="item.icon"/>
+		<!-- 自定义 -->
+		<h2>自定义图标</h2>
+		<Input search placeholder="可以搜索关键字，比如：shanchu" @on-search="searchIcon" @on-change="clear"/>
+		<div class="iconList" v-show="!isDoSearch">
+			<div class="icon-item" v-for="item in allList" :key="item.icon" v-clipboard="item.clipOptions">
+				<div class="icon-content">
+					<Icon v-if="item.type=='iconfont'" :custom="`iconfont icon-${item.icon}`" size="24" />
+					<Icon v-else :type="item.icon" size="24" />
+				</div>
+				<div class="icon-code">
+					{{item.icon}}
+				</div>
 			</div>
-			<div class="icon-code">
-				{{item.icon}}
+		</div>
+		<div class="iconList" v-show="isDoSearch">
+			<div class="icon-item" v-for="item in searchList" :key="item.icon" v-clipboard="item.clipOptions">
+				<div class="icon-content">
+					<Icon v-if="item.type=='iconfont'" :custom="`iconfont icon-${item.icon}`" size="24" />
+					<Icon v-else :type="item.icon" size="24" />
+				</div>
+				<div class="icon-code">
+					{{item.icon}}
+				</div>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
-import Icons from "_c/icons";
-import CommonIcon from "_c/common-icon";
-import iconList from "@/assets/icons/iconList.js";
+import iconList from "@/assets/icons/iconList.js"; //文件运行项目时自动生成
+import iviewIconList from "@/assets/icons/iviewIconList.js"; //文件运行项目时自动生成
 export default {
 	name: "icons_pages",
-	components: {
-		Icons,
-		CommonIcon,
-	},
 	data() {
 		return {
 			customIconList: ["woman", "man", "smile", "meh", "frown", "bear"],
 			iconList: {},
+			iviewIconList: {},
+			allList: [],
+			searchList: [],
+			isDoSearch: false,
 		}
 	},
 	methods:{
-		copy(item){
-
-		}
-	},
-	created(){
-		this.iconList = iconList.map(item =>{
+		searchIcon(value){
+			if(value) this.isDoSearch = true
+			this.searchList = this.allList.filter(item => item.icon.indexOf(value) > -1)
+		},
+		clear(e){
+			if(e.target.value == ''){
+				this.isDoSearch = false
+			}
+		},
+		createOptions(item,type){
 			return {
 				icon: item,
-				clipOptions: {
-					value: `<icons :type="${item}"/>`,
+				type,
+				clipOptions:{
+					value: type == 'ivu' ? `<Icon type="${item}" />` : `<Icon custom="iconfont icon-${item}" size="24" />`,
 					success: (e) => {
 						this.$Message.success('复制成功')
 					},
@@ -46,7 +67,11 @@ export default {
 					}
 				}
 			}
-		})
+		}
+	},
+	created(){
+		this.allList = this.allList.concat(iviewIconList.map(item => this.createOptions(item,'ivu')),iconList.map(item => this.createOptions(item,'iconfont')))
+		this.searchList = JSON.parse(JSON.stringify(this.allList))
 	},
 	mounted(){
 		
@@ -56,6 +81,10 @@ export default {
 
 <style lang="less" scoped>
 .icons{
+	.iconList{
+		overflow: hidden;
+	}
+	h2{text-align: center;}
 	.icon-item {
 		float: left;
 		margin: 6px 6px 6px 0;
@@ -66,7 +95,7 @@ export default {
 		height: 100px;
 		color: #5c6b77;
 		transition: all .2s ease;
-		position: relative;
+		// position: relative;
 		padding-top: 10px;
 		.icon-content{
 			display: block;
