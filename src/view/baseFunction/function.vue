@@ -1,6 +1,6 @@
 <template>
     <div>
-        <iconPage v-if="$route.params.id == '自定义图标'"></iconPage>
+        <iconPage v-if="$route.query.id == 'icons'"></iconPage>
     </div>
 </template>
 

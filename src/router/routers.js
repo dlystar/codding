@@ -482,11 +482,11 @@ export default [
         component: () => import('@/view/baseFunction/index.vue')
       },
       {
-        path: 'one_function_page/:id',
+        path: 'one_function_page',
         name: 'one_function_page',
         meta: {
           icon: 'md-flower',
-          title: route => `${route.params.id}`,
+          title: route => `${route.query.id}`,
           notCache: true,
           hideInMenu: true
         },

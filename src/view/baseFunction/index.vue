@@ -21,8 +21,8 @@
                         icon: 'ios-flower',
                         route:{
                             name: 'one_function_page',
-                            params: {id: '自定义图标'},
-                            meta: {name: '自定义icon图标'},
+                            query: {id: 'icons'},
+                            title: {name: '自定义icon图标'},
                         }
                     }
                 ]

@@ -7,7 +7,7 @@ import { setToken, getToken, canTurnTo, setTitle } from '@/libs/util'
 import config from '@/config'
 import Main from '@/components/main'
 const { homeName } = config
-
+const lSearch = window.location.search
 Vue.use(Router)
 const router = new Router({
   routes,
@@ -16,7 +16,6 @@ const router = new Router({
 const LOGIN_PAGE_NAME = 'login'
 
 const turnTo = (to, access, next) => {
-  console.log('页面:',to,access);
   if (canTurnTo(to.name, access, routes)) next() // 有权限，可访问
   else next({ replace: true, name: 'error_401' }) // 无权限，重定向到401页面
 }
@@ -47,9 +46,14 @@ router.beforeEach((to, from, next) => {
           isLoaded = true
           let len = to.path.split('/').length
           let pageName = to.path.split('/')[len-1].toString()
-          next({
-            name: pageName
-          })
+          console.log('路由：',pageName);
+          if(lSearch){
+            next()
+          }else{
+            next({
+              name: pageName
+            })
+          }
         }
         // 拉取用户信息，通过用户权限和跳转的页面的name来判断是否有权限访问;access必须是一个数组，如：['super_admin'] ['super_admin', 'admin']
         turnTo(to, user.access, next)  

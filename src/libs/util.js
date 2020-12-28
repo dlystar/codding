@@ -171,7 +171,6 @@ export const getNewTagList = (list, newRoute) => {
  * @param {*} route 路由列表
  */
 const hasAccess = (access, route) => {
-  console.log('我是',access,route);
   if (route.meta && route.meta.access) return hasOneOf(access, route.meta.access)
   else return true
 }
