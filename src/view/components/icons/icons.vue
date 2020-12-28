@@ -1,8 +1,10 @@
 <template>
 	<div class="icons">
 		<!-- 自定义 -->
-		<h2>自定义图标</h2>
-		<Input search placeholder="可以搜索关键字，比如：shanchu" @on-search="searchIcon" @on-change="clear"/>
+		<div class="iconheader">
+			<h2>自定义图标</h2>
+			<Input search placeholder="可以搜索关键字，比如：shanchu" @on-search="searchIcon" @on-change="clear"/>
+		</div>
 		<div class="iconList" v-show="!isDoSearch">
 			<div class="icon-item" v-for="item in allList" :key="item.icon" v-clipboard="item.clipOptions">
 				<div class="icon-content">

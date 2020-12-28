@@ -4,7 +4,6 @@ require('./build/createIconList.js')
 const resolve = dir => {
   return path.join(__dirname, dir)
 }
-
 // 项目部署基础
 // 默认情况下，我们假设你的应用将被部署在域的根目录下,
 // 例如：https://www.my-app.com/
@@ -18,17 +17,7 @@ const BASE_URL = process.env.NODE_ENV === 'production'
   : '/admin'
 
 // CK配置
-// const CKEditorWebpackPlugin = require( '@ckeditor/ckeditor5-dev-webpack-plugin' );
-// const { styles } = require( '@ckeditor/ckeditor5-dev-utils' );
-// require( 'babel-polyfill' )
 module.exports = {
-  // Project deployment base
-  // By default we assume your app will be deployed at the root of a domain,
-  // e.g. https://www.my-app.com/
-  // If your app is deployed at a sub-path, you will need to specify that
-  // sub-path here. For example, if your app is deployed at
-  // https://www.foobar.com/my-app/
-  // then change this to '/my-app/'
   baseUrl: BASE_URL,
   // tweak internal webpack configuration.
   // see https://github.com/vuejs/vue-cli/blob/dev/docs/webpack.md
@@ -44,16 +33,15 @@ module.exports = {
       .set('_c', resolve('src/components'))
       .set('@waste',resolve('src/view/wasteRecovery'))
       .set('@com',resolve('src/view/wasteRecovery/commonComponents'));
-
-    // const svgRule = config.module.rule( 'svg' );
-    //
-    // svgRule.exclude.add( __dirname + '/node_modules/@ckeditor' );
     config.module
       .rule( 'cke-svg' )
       .test( /iview-admin.src.*?js$/,/ckeditor5-[^\/\\]+[\/\\].*\.js$/)//,/ckeditor5-[^/\\]+[/\\]theme[/\\]icons[/\\][^/\\]+\.svg$/
       .use( 'raw-loader','babel-loader')
       .loader( 'babel-loader', 'raw-loader')
     ;
+    config
+      .plugin('webpack-bundle-analyzer')
+      .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
   },
   // 设为false打包时不生成.map文件
   productionSourceMap: false,
@@ -66,35 +54,9 @@ module.exports = {
   transpileDependencies: [
       'vue-echarts',
       'resize-detector',
-      // /ckeditor5-[^/\\]+[/\\]src[/\\].+\.js$/,
       'iview',
       'axios',
       'tree-table-vue',
       '@ckeditor/ckeditor5-vue',
-      // '@ckeditor/ckeditor5-build-decoupled-document'
-      // '@ckeditor'
     ],
-
-  // configureWebpack: {
-  //   plugins: [
-  //     // CKEditor needs its own plugin to be built using webpack.
-  //     new CKEditorWebpackPlugin( {
-  //       // See https://ckeditor.com/docs/ckeditor5/latest/features/ui-language.html
-  //       language: 'en'
-  //     } )
-  //   ]
-  // },
-
-  // css: {
-  //   loaderOptions: {
-  //     // Various modules in the CKEditor source code import .css files.
-  //     // These files must be transpiled using PostCSS in order to load properly.
-  //     postcss: styles.getPostCssConfig( {
-  //       themeImporter: {
-  //         themePath: require.resolve( '@ckeditor/ckeditor5-theme-lark' )
-  //       },
-  //       minify: true
-  //     } )
-  //   }
-  // },
 }
